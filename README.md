@@ -125,9 +125,9 @@ En este caso para realizar la consulta se ingresa el cargo del empleado en la ú
 2. Nro de orden de producción, fecha y el estado de la orden de producción (Se debe mostrar la descripción del estado, código del estado, valor total de la orden de producción.  
 3. Detalle de orden: Nombre de la prenda, Código de la prenda, Cantidad, Valor total en pesos y en dólares.  
 
-    **Endpoint**: `http://localhost:5033/api/orden/consulta-5/{IdCliente}`
-    
-    **Método**: `GET`
+        **Endpoint**: `http://localhost:5033/api/orden/consulta-5/{IdCliente}`
+        
+        **Método**: `GET`
 
 En este caso para realizar la consulta se ingresa el ID del cliente del empleado en la última parte del Endpoint: `{IdCliente}` = `1`. 
 
@@ -138,9 +138,9 @@ En este caso para realizar la consulta se ingresa el ID del cliente del empleado
 2. Nombre del empleado
 3. Fecturas : Nro Factura, fecha y total de la factura.
 
-    **Endpoint**: `http://localhost:5033/api/venta/consulta-6/{IdEmpleado}`
-    
-    **Método**: `GET`
+        **Endpoint**: `http://localhost:5033/api/venta/consulta-6/{IdEmpleado}`
+        
+        **Método**: `GET`
 
 En este caso para realizar la consulta se ingresa el ID del empleado del empleado en la última parte del Endpoint: `{IdEmpleado}` = `1`. 
 
