@@ -14,6 +14,28 @@ public class PrendaRepository : GenericRepository<Prenda>, IPrenda
         _context = context;
     }
 
+    public async Task<IEnumerable<Object>> InsumosPorPrenda(string CodPrenda)
+    {
+        var insumosPorPrenda = await (
+            from i in _context.InsumoPrendas
+            join p in _context.Prendas on i.IdPrenda equals p.Id
+            where p.IdPrenda.ToLower() == CodPrenda.ToLower()
+            group i by p.Id into prendas
+            select new
+            {
+                Prenda = prendas.Key,
+                Insumos = prendas.Select(insumo => new 
+                {
+                    Id = insumo.Id,
+                    Nombre = insumo.Insumo.Nombre,
+                    StockMax = insumo.Insumo.StockMax,
+                    StockMin = insumo.Insumo.StockMin
+                }).ToList()
+            }).ToListAsync();
+
+        return insumosPorPrenda;
+    }
+
     public override async Task<IEnumerable<Prenda>> GetAllAsync()
     {
         return await _context.Prendas
