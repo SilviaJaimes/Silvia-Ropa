@@ -57,6 +57,17 @@ public class EmpleadoController : BaseApiController
         return new Pager<EmpleadoDto>(listEntidad, entidad.totalRegistros, EmpleadoParams.PageIndex, EmpleadoParams.PageSize, EmpleadoParams.Search);
     }
 
+    [HttpGet("consulta-4/{Cargo}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> EmpleadoPorCargo(string Cargo)
+    {
+        var entidad = await unitofwork.Empleados.EmpleadoPorCargo(Cargo);
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

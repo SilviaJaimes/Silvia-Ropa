@@ -14,6 +14,21 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         _context = context;
     }
 
+    public async Task<IEnumerable<Object>> EmpleadoPorCargo(string Cargo)
+    {
+        var empleadoPorCargo = await (
+            from e in _context.Empleados
+            join c in _context.Cargos on e.IdCargo equals c.Id
+            where c.Descripcion.ToLower() == Cargo.ToLower() 
+            select new 
+            {
+                EmpleadoId = e.Id,
+                Nombre = e.Nombre
+            }).ToListAsync();
+
+        return empleadoPorCargo;
+    }
+
     public override async Task<IEnumerable<Empleado>> GetAllAsync()
     {
         return await _context.Empleados

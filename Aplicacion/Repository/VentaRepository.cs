@@ -14,6 +14,34 @@ public class VentaRepository : GenericRepository<Venta>, IVenta
         _context = context;
     }
 
+    public async Task<IEnumerable<Object>> VentaPorEmpleado(int IdEmpleado)
+    {
+        var ordenesPorCliente = await (
+            from d in _context.DetalleVentas
+            join v in _context.Ventas on d.IdVenta equals v.Id
+            join e in _context.Empleados on v.IdEmpleado equals e.Id
+            where e.Id == IdEmpleado 
+            select new 
+            {
+                IdEmpleado = e.Id,
+                Nombre = e.Nombre,
+
+                Factura = (from v in _context.Ventas
+                            where e.Id == IdEmpleado
+                            select new {
+                                NroFactura = v.Id,
+                                Fecha = v.Fecha,
+                                Total = (from d in _context.DetalleVentas
+                                        where e.Id == IdEmpleado
+                                        select new {
+                                            SubTotal = (d.Cantidad * d.ValorUnit)
+                                        }).Sum(x => x.SubTotal)
+                            }).ToList()
+            }).ToListAsync();
+
+        return ordenesPorCliente;
+    } 
+
     public override async Task<IEnumerable<Venta>> GetAllAsync()
     {
         return await _context.Ventas

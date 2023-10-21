@@ -57,6 +57,17 @@ public class VentaController : BaseApiController
         return new Pager<VentaDto>(listEntidad, entidad.totalRegistros, VentaParams.PageIndex, VentaParams.PageSize, VentaParams.Search);
     }
 
+    [HttpGet("consulta-6/{IdEmpleado}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> VentaPorEmpleado(int IdEmpleado)
+    {
+        var entidad = await unitofwork.Ventas.VentaPorEmpleado(IdEmpleado);
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

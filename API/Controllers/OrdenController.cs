@@ -57,6 +57,28 @@ public class OrdenController : BaseApiController
         return new Pager<OrdenDto>(listEntidad, entidad.totalRegistros, OrdenParams.PageIndex, OrdenParams.PageSize, OrdenParams.Search);
     }
 
+    [HttpGet("consulta-3")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> OrdenesProduccion()
+    {
+        var entidad = await unitofwork.Ordenes.OrdenesProduccion();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-5/{IdCliente}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> OrdenesPorCliente(int IdCliente)
+    {
+        var entidad = await unitofwork.Ordenes.OrdenesPorCliente(IdCliente);
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

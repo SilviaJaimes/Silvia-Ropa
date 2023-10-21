@@ -57,6 +57,16 @@ public class ProveedorController : BaseApiController
         return new Pager<ProveedorDto>(listEntidad, entidad.totalRegistros, ProveedorParams.PageIndex, ProveedorParams.PageSize, ProveedorParams.Search);
     }
 
+    [HttpGet("consulta-2/{Nit}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> InsumosPorProveedor(string Nit)
+    {
+        var entidad = await unitofwork.Proveedores.InsumosPorProveedor(Nit);
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

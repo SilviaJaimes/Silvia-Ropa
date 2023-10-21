@@ -14,6 +14,33 @@ public class InventarioRepository : GenericRepository<Inventario>, IInventario
         _context = context;
     }
 
+    public async Task<IEnumerable<Object>> ProductosYTallas()
+    {
+        var ordenesPorCliente = await (
+            from it in _context.InventarioTallas
+            join i in _context.Inventarios on it.IdInventario equals i.Id
+            join t in _context.Tallas on it.IdTalla equals t.Id
+            where i.Id == t.Id
+            select new 
+            {
+                Productos = (from i in _context.Inventarios
+                            where i.Id == t.Id
+                            select new {
+                                IdInventario = i.Id,
+                                NombreProducto = i.Prenda.Nombre
+                            }).ToList(),
+
+                Tallas = (from t in _context.Tallas
+                            where i.Id == t.Id
+                            select new {
+                                Talla = t.Descripcion,
+                                Cantidad = it.Cantidad
+                            }).ToList(),
+            }).ToListAsync();
+
+        return ordenesPorCliente;
+    } 
+
     public override async Task<IEnumerable<Inventario>> GetAllAsync()
     {
         return await _context.Inventarios

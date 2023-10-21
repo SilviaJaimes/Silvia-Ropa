@@ -14,6 +14,22 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
         _context = context;
     }
 
+    public async Task<IEnumerable<Object>> InsumosPorProveedor(string Nit)
+    {
+        var insumosPorProveedor = await (
+            from i in _context.InsumoProveedores
+            join p in _context.Proveedores on i.IdProveedor equals p.Id
+            join tp in _context.TipoPersonas on p.IdTipoPersona equals tp.Id
+            where p.IdProveedor.ToLower() == Nit.ToLower() && tp.Nombre == "Juridico"
+            select new
+            {
+                Insumo = i.IdInsumo,
+                Nombre = i.Insumo.Nombre
+            }).ToListAsync();
+
+        return insumosPorProveedor;
+    }
+
     public override async Task<IEnumerable<Proveedor>> GetAllAsync()
     {
         return await _context.Proveedores

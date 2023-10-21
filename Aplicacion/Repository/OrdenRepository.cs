@@ -14,6 +14,72 @@ public class OrdenRepository : GenericRepository<Orden>, IOrden
         _context = context;
     }
 
+    public async Task<IEnumerable<object>> OrdenesProduccion()
+    {
+        var procesadas = await (
+            from o in _context.Ordenes
+            join e in _context.Estados on o.IdEstado equals e.Id
+
+            where e.Descripcion == "En proceso"
+
+            select new{
+                IdOrden = o.Id,
+                FechaOrden = o.Fecha
+            }).Distinct()
+            .ToListAsync();
+        return procesadas;
+    } 
+
+    public async Task<IEnumerable<Object>> OrdenesPorCliente(int IdCliente)
+    {
+        var ordenesPorCliente = await (
+            from d in _context.DetalleOrdenes
+            join o in _context.Ordenes on d.IdOrden equals o.Id
+            join c in _context.Clientes on o.IdCliente equals c.Id
+            join e in _context.Estados on o.IdEstado equals e.Id
+            where c.Id == IdCliente 
+            select new 
+            {
+                Cliente = (from c in _context.Clientes
+                            where c.Id == IdCliente
+                            select new {
+                                IdCliente = c.Id,
+                                Nombre = c.Nombre,
+                                Municipio = c.Municipio.Nombre
+                            }).ToList(),
+
+                Orden = (from o in _context.Ordenes
+                            join te in _context.TipoEstados on e.IdTipoEstado equals te.Id
+                            where c.Id == IdCliente
+                            select new {
+                                Orden = o.Id,
+                                FechaOrden = o.Fecha,
+                                Estado = te.Descripcion,
+                                CodEstado = e.IdTipoEstado
+                            }).ToList(),
+
+                DetalleOrden = (from d in _context.DetalleOrdenes
+                            where c.Id == IdCliente
+                            select new {
+                                NombrePrenda = d.Prenda.Nombre,
+                                CodPrenda = d.IdPrenda,
+                                Cantidad = d.CantidadProducir,
+                                ValorTotalPesos = (from de in _context.DetalleOrdenes
+                                        where c.Id == IdCliente
+                                        select new {
+                                            SubTotal = (d.CantidadProducir * d.Prenda.ValorUnitCop)
+                                        }).Sum(x => x.SubTotal),
+                                ValorTotalDolares = (from de in _context.DetalleOrdenes
+                                        where c.Id == IdCliente
+                                        select new {
+                                            SubTotal = (d.CantidadProducir * d.Prenda.ValorUnitUsd)
+                                        }).Sum(x => x.SubTotal)
+                            }).ToList()
+            }).ToListAsync();
+
+        return ordenesPorCliente;
+    } 
+
     public override async Task<IEnumerable<Orden>> GetAllAsync()
     {
         return await _context.Ordenes
