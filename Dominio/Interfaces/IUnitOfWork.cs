@@ -18,16 +18,16 @@ public interface IUnitOfWork
         IInsumo Insumos { get; }
         IInsumoPrenda InsumoPrendas { get; }
         IInsumoProveedor InsumoProveedores { get; }
-        IInventario Invcentarios { get; }
+        IInventario Inventarios { get; }
         IInventarioTalla InventarioTallas { get; }
-        IMunicipio MunicipioS { get; }
+        IMunicipio Municipios { get; }
         IOrden Ordenes { get; }
         IPais Paises { get; }
         IPrenda Prendas { get; }
         IProveedor Proveedores { get; }
         ITalla Tallas { get; }
         ITipoEstado TipoEstados { get; }
-        ITipoPersona Tipopersonas { get; }
+        ITipoPersona TipoPersonas { get; }
         ITipoProteccion TipoProtecciones { get; }
         IVenta Ventas { get; }
         Task<int> SaveAsync();

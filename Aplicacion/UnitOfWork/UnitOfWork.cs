@@ -232,7 +232,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    public IInventario Invcentarios
+    public IInventario Inventarios
     {
         get
         {
@@ -256,7 +256,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    public IMunicipio MunicipioS
+    public IMunicipio Municipios
     {
         get
         {
@@ -340,7 +340,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    public ITipoPersona Tipopersonas
+    public ITipoPersona TipoPersonas
     {
         get
         {
