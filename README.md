@@ -21,7 +21,7 @@ Necesitaremos de este usuario para obtener el token que se utilizará para el re
 
 ## 1. Generación del token 🔑:
 
-**Endpoint**: `http://localhost:5158/api/usuario/token`
+**Endpoint**: `http://localhost:5033/api/usuario/token`
 
 **Método**: `POST`
 
@@ -36,7 +36,7 @@ Al obtener el token del administrador, se podrá realizar el registro de usuario
 
 ## 2. Registro de Usuarios 📝:
 
-**Endpoint**: `http://localhost:5158/api/usuario/register`
+**Endpoint**: `http://localhost:5033/api/usuario/register`
 
 **Método**: `POST`
 
@@ -55,7 +55,7 @@ Una vez registrado el usuario tendrá que ingresar para recibir un token, este s
 
 ## 3. Refresh Token 🔄:
 
-**Endpoint**: `http://localhost:5158/api/usuario/refresh-token`
+**Endpoint**: `http://localhost:5033/api/usuario/refresh-token`
 
 **Método**: `POST`
 
@@ -70,13 +70,13 @@ Se dejan los mismos datos en el Body y luego se ingresa al "Auth", "Bearer", all
 
 **Otros Endpoints**
 
-Obtener Todos los Usuarios: GET `http://localhost:5158/api/usuario`
+Obtener Todos los Usuarios: GET `http://localhost:5033/api/usuario`
 
-Obtener Usuario por ID: GET `http://localhost:5158/api/usuario/{id}`
+Obtener Usuario por ID: GET `http://localhost:5033/api/usuario/{id}`
 
-Actualizar Usuario: PUT `http://localhost:5158/api/usuario/{id}`
+Actualizar Usuario: PUT `http://localhost:5033/api/usuario/{id}`
 
-Eliminar Usuario: DELETE `http://localhost:5158/api/usuario/{id}`
+Eliminar Usuario: DELETE `http://localhost:5033/api/usuario/{id}`
 
 
 ## Desarrollo de los Endpoints requeridos⌨️
@@ -87,7 +87,7 @@ Para consultar la versión 1.0 de todos se ingresa únicamente el Endpoint.
 
 ## 1. Listar los insumos que pertenecen a una prenda especifica. El usuario debe ingresar el código de la prenda:
 
-    **Endpoint**: `http://localhost:5158/api/prenda/consulta-1/{CodPrenda}`
+    **Endpoint**: `http://localhost:5033/api/prenda/consulta-1/{CodPrenda}`
     
     **Método**: `GET`
 
@@ -96,23 +96,23 @@ En este caso para realizar la consulta se ingresa el código de la prenda en la 
 
 ## 2. Listar los insumos que son vendidos por un determinado proveedor cuyo tipo de persona sea Persona Jurídica. El usuario debe ingresar el Nit de proveedor:
 
-    **Endpoint**: `http://localhost:5158/api/proveedor/consulta-2/{Nit}`
+    **Endpoint**: `http://localhost:5033/api/proveedor/consulta-2/{Nit}`
     
     **Método**: `GET`
 
-En este caso para realizar la consulta se ingresa el tipo de persona en la última parte del Endpoint: `{Nit}` = `1`.  
+En este caso para realizar la consulta se ingresa el tipo de persona en la última parte del Endpoint: `{Nit}` = `1`. 
 
 
 ## 3. Listar todas las ordenes de producción cuyo estado se en proceso:
 
-    **Endpoint**: `http://localhost:5158/api/orden/consulta-3`
+    **Endpoint**: `http://localhost:5033/api/orden/consulta-3`
     
     **Método**: `GET`
 
 
 ## 4. Listar los empleados por un cargo especifico. Los cargos que se encuentran en la empresa son: Auxiliar de Bodega, Jefe de Producción, Corte, Jefe de bodega, Secretaria, Jefe de IT:
 
-    **Endpoint**: `http://localhost:5158/api/empleado/consulta-4/{Cargo}`
+    **Endpoint**: `http://localhost:5033/api/empleado/consulta-4/{Cargo}`
     
     **Método**: `GET`
 
@@ -125,7 +125,7 @@ En este caso para realizar la consulta se ingresa el cargo del empleado en la ú
 2. Nro de orden de producción, fecha y el estado de la orden de producción (Se debe mostrar la descripción del estado, código del estado, valor total de la orden de producción.  
 3. Detalle de orden: Nombre de la prenda, Código de la prenda, Cantidad, Valor total en pesos y en dólares.  
 
-    **Endpoint**: `http://localhost:5158/api/orden/consulta-5/{IdCliente}`
+    **Endpoint**: `http://localhost:5033/api/orden/consulta-5/{IdCliente}`
     
     **Método**: `GET`
 
@@ -134,16 +134,22 @@ En este caso para realizar la consulta se ingresa el ID del cliente del empleado
 
 ## 6. Listar las ventas realizadas por un empleado especifico. El usuario debe ingresar el Id del empleado y mostrar la siguiente información:
 
-1. IdCliente, Nombre, Municipio donde se encuentra ubicado.  
-2. Nro de orden de producción, fecha y el estado de la orden de producción (Se debe mostrar la descripción del estado, código del estado, valor total de la orden de producción.  
-3. Detalle de orden: Nombre de la prenda, Código de la prenda, Cantidad, Valor total en pesos y en dólares.  
+1. Id Empleado
+2. Nombre del empleado
+3. Fecturas : Nro Factura, fecha y total de la factura.
 
-    **Endpoint**: `http://localhost:5158/api/orden/consulta-5/{IdCliente}`
+    **Endpoint**: `http://localhost:5033/api/venta/consulta-6/{IdEmpleado}`
     
     **Método**: `GET`
 
-En este caso para realizar la consulta se ingresa el ID del cliente del empleado en la última parte del Endpoint: `{IdCliente}` = `1`. 
+En este caso para realizar la consulta se ingresa el ID del empleado del empleado en la última parte del Endpoint: `{IdEmpleado}` = `1`. 
 
+
+## 7. Listar los productos y tallas del inventario. La consulta debe mostrar el id del inventario, nombre del producto, tallas y cantidad de cada talla:
+
+    **Endpoint**: `http://localhost:5033/api/inventario/consulta-7`
+    
+    **Método**: `GET`     
 
 
 Para consultar la versión 1.1 se deben seguir los siguientes pasos:  
