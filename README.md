@@ -121,9 +121,9 @@ En este caso para realizar la consulta se ingresa el cargo del empleado en la ú
 
 ## 5. Listar las ordenes de producción que pertenecen a un cliente especifico. El usuario debe ingresar el IdCliente y debe obtener la siguiente información:
 
-1. IdCliente, Nombre, Municipio donde se encuentra ubicado.  
-2. Nro de orden de producción, fecha y el estado de la orden de producción (Se debe mostrar la descripción del estado, código del estado, valor total de la orden de producción.  
-3. Detalle de orden: Nombre de la prenda, Código de la prenda, Cantidad, Valor total en pesos y en dólares.  
+**1.** IdCliente, Nombre, Municipio donde se encuentra ubicado.  
+**2.** Nro de orden de producción, fecha y el estado de la orden de producción (Se debe mostrar la descripción del estado, código del estado, valor total de la orden de producción.  
+**3.** Detalle de orden: Nombre de la prenda, Código de la prenda, Cantidad, Valor total en pesos y en dólares.  
 
         **Endpoint**: `http://localhost:5033/api/orden/consulta-5/{IdCliente}`
         
@@ -134,9 +134,9 @@ En este caso para realizar la consulta se ingresa el ID del cliente del empleado
 
 ## 6. Listar las ventas realizadas por un empleado especifico. El usuario debe ingresar el Id del empleado y mostrar la siguiente información:
 
-1. Id Empleado
-2. Nombre del empleado
-3. Fecturas : Nro Factura, fecha y total de la factura.
+**1.** Id Empleado
+**2.** Nombre del empleado
+**3.** Fecturas : Nro Factura, fecha y total de la factura.
 
         **Endpoint**: `http://localhost:5033/api/venta/consulta-6/{IdEmpleado}`
         
